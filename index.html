@@ -1,0 +1,226 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<title>Untitled</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<link rel="stylesheet" href="assets/css/app.css" />
+</head>
+
+<body class="is-preload">
+
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Intro -->
+		<section class="intro">
+			<header>
+				<h1>Ad Compressor</h1>
+				<p>Effortlessly Optimize Your HTML Banner Display Ads.</p>
+				<ul class="actions">
+					<li><a href="#first" class="arrow scrolly"><span class="label">Next</span></a></li>
+				</ul>
+			</header>
+			<div>
+				<div id="app-injection">
+					<div id="app">
+						<div class="custom-file-input">
+							<input type="file" id="input-file" accept=".zip" />
+							<span class="custom-file-input-text">Drop your zip file here</span>
+						</div>
+						<div id="image-previews" style="display: none;">
+							<h3>Image Previews</h3>
+						</div>
+						<div class="adjust-controls">
+							<label for="image-quality">Image Quality (0.0 - 1.0)</label>
+							<input type="range" id="image-quality" min="0.0" max="1" step="0.01" value="0.75" />
+							<output id="image-quality-output" for="image-quality">0.75</output>
+							<br />
+							<label for="resize-factor" style="margin-top: 1.4em;">Resize Factor (0.0 - 1.0)</label>
+							<input type="range" id="resize-factor" min="0.1" max="1" step="0.1" value="1" />
+							<output id="resize-factor-output" for="resize-factor">1</output>
+							<br />
+						</div>
+						<button id="compress-btn" disabled>Compress</button>
+						<button id="reset-btn">Reset</button>
+					</div>
+					<br />
+					<progress id="compression-progress" value="0" max="100"></progress>
+					<p id="compressed-size" style="display: none;"></p>
+					<a id="download-link" style="display: none;">Download Compressed ZIP</a>
+					<br />
+				</div>
+			</div>
+		</section>
+
+		<!-- Section -->
+		<section id="first" style="margin-top: 10em !important;">
+			<header>
+				<h2>What is Ad Compressor?</h2>
+			</header>
+			<div class="content">
+				<p><strong>Ad Compressor</strong> is a powerful, user-friendly tool designed to optimize digital advertising content for better performance and efficiency. It streamlines the process of compressing images and other files in bulk for your HTML banner ads, saving you valuable time and effort by eliminating the need to optimize each asset individually. By intelligently compressing the end product without compromising visual quality, Ad Compressor ensures your ad content always stays within the maximum file size limits when uploading your ZIP files to Google Ads campaigns.</p>
+				<span class="image main"><img src="images/pic02.jpg" alt="" /></span>
+			</div>
+		</section>
+
+		<!-- Section -->
+		<section>
+			<header>
+				<h2>Why Ad Compressor?</h2>
+			</header>
+			<div class="content">
+				<p><strong>Ad Compressor</strong> offers your faster loading times and improved user experiences, your ads will have maximum impact, driving better results. The intuitive interface and customizable settings allow users to fine-tune their ads, ensuring the perfect balance between quality and size. Whether you're a marketer, designer, or small business owner, Ad Compressor offers a seamless solution to help you enhance your ad campaigns, stay compliant with platform requirements, and ultimately boost your advertising success.</p>
+				<ul class="feature-icons">
+					<li class="icon solid fa-laptop">Consequat tempus</li>
+					<li class="icon solid fa-bolt">Etiam adipiscing</li>
+					<li class="icon solid fa-signal">Libero nullam</li>
+					<li class="icon solid fa-cog">Blandit condimentum</li>
+					<li class="icon solid fa-map-marker-alt">Lorem ipsum dolor</li>
+					<li class="icon solid fa-code">Nibh amet venenatis</li>
+				</ul>
+				<p>Vehicula ultrices sed ultricies condimentum. Magna sed etiam consequat, et lorem adipiscing sed nulla. Volutpat nisl et tempus et dolor libero, feugiat magna tempus, sed et lorem adipiscing.</p>
+			</div>
+		</section>
+
+		<!--
+		<section>
+			<header>
+				<h2>Ultrices erat magna sed condimentum</h2>
+			</header>
+			<div class="content">
+				<p><strong>Integer mollis egestas</strong> nam maximus erat id euismod egestas. Pellentesque sapien ac quam. Lorem ipsum dolor sit nullam.</p>
+
+				<section>
+					<header>
+						<h3>Erat aliquam</h3>
+						<p>Vehicula ultrices dolor amet ultricies et condimentum. Magna sed etiam consequat, et lorem adipiscing sed dolor sit amet, consectetur amet do eiusmod tempor incididunt ipsum suspendisse ultrices gravida.</p>
+					</header>
+					<div class="content">
+						<div class="gallery">
+							<a href="images/gallery/fulls/01.jpg" class="landscape"><img src="images/gallery/thumbs/01.jpg" alt="" /></a>
+							<a href="images/gallery/fulls/02.jpg"><img src="images/gallery/thumbs/02.jpg" alt="" /></a>
+							<a href="images/gallery/fulls/03.jpg"><img src="images/gallery/thumbs/03.jpg" alt="" /></a>
+							<a href="images/gallery/fulls/04.jpg" class="landscape"><img src="images/gallery/thumbs/04.jpg" alt="" /></a>
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<header>
+						<h3>Nisl consequat</h3>
+						<p>Aenean ornare velit lacus, ac varius enim ullamcorper eu. Proin aliquam sed facilisis ante interdum congue. Integer mollis, nisl amet convallis, porttitor magna ullamcorper, amet mauris. Ut magna finibus nisi nec lacinia ipsum maximus.</p>
+					</header>
+					<div class="content">
+						<div class="gallery">
+							<a href="images/gallery/fulls/05.jpg" class="landscape"><img src="images/gallery/thumbs/05.jpg" alt="" /></a>
+							<a href="images/gallery/fulls/06.jpg"><img src="images/gallery/thumbs/06.jpg" alt="" /></a>
+							<a href="images/gallery/fulls/07.jpg"><img src="images/gallery/thumbs/07.jpg" alt="" /></a>
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<header>
+						<h3>Lorem gravida</h3>
+						<p>Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aenean ornare velit lacus, ac varius sed enim lorem ullamcorper dolore. ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis.</p>
+					</header>
+					<div class="content">
+						<div class="gallery">
+							<a href="images/gallery/fulls/08.jpg" class="portrait"><img src="images/gallery/thumbs/08.jpg" alt="" /></a>
+							<a href="images/gallery/fulls/09.jpg" class="portrait"><img src="images/gallery/thumbs/09.jpg" alt="" /></a>
+							<a href="images/gallery/fulls/10.jpg" class="landscape"><img src="images/gallery/thumbs/10.jpg" alt="" /></a>
+						</div>
+					</div>
+				</section>
+
+			</div>
+		</section>
+
+		<section>
+			<header>
+				<h2>Duis sed adpiscing veroeros amet</h2>
+			</header>
+			<div class="content">
+				<p><strong>Proin tempus feugiat</strong> sed varius enim lorem ullamcorper dolore aliquam aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore.</p>
+				<ul class="actions">
+					<li><a href="#" class="button primary large">Get Started</a></li>
+					<li><a href="#" class="button large">Learn More</a></li>
+				</ul>
+			</div>
+		</section> -->
+
+		<section>
+			<header>
+				<h2>Get in touch</h2>
+			</header>
+			<div class="content">
+				<p><strong>Auctor commodo</strong> interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis.</p>
+				<form>
+					<div class="fields">
+						<div class="field half">
+							<input type="text" name="name" id="name" placeholder="Name" />
+						</div>
+						<div class="field half">
+							<input type="email" name="email" id="email" placeholder="Email" />
+						</div>
+						<div class="field">
+							<textarea name="message" id="message" placeholder="Message" rows="7"></textarea>
+						</div>
+					</div>
+					<ul class="actions">
+						<li><input type="submit" value="Send Message" class="button primary" /></li>
+					</ul>
+				</form>
+			</div>
+			<footer>
+				<ul class="items">
+					<li>
+						<h3>Email</h3>
+						<a href="#">information@untitled.ext</a>
+					</li>
+					<li>
+						<h3>Phone</h3>
+						<a href="#">(000) 000-0000</a>
+					</li>
+					<li>
+						<h3>Address</h3>
+						<span>1234 Somewhere Road, Nashville, TN 00000</span>
+					</li>
+					<li>
+						<h3>Elsewhere</h3>
+						<ul class="icons">
+							<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+							<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+							<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+							<li><a href="#" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+							<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+							<li><a href="#" class="icon brands fa-codepen"><span class="label">Codepen</span></a></li>
+						</ul>
+					</li>
+				</ul>
+			</footer>
+		</section>
+
+		<!-- Copyright -->
+		<div class="copyright">&copy; Untitled. All rights reserved.</div>
+
+	</div>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+	<script src="assets/js/app.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pica/7.1.1/pica.min.js"></script>
+</body>
+
+</html>

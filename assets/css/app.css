@@ -1,0 +1,137 @@
+#app-injection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #fdfdfd;
+  font-family: monospace !important;
+  margin: 19% 20% 0 0;
+}
+
+
+#app {
+  border-radius: none;
+}
+
+.custom-file-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border: 3px dotted #cccccc;
+  cursor: pointer;
+  height: 150px;
+  position: relative;
+  background: #fafafa;
+}
+
+#input-file {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.custom-file-input-text {
+  font-family: monospace !important;
+  z-index: 1;
+  color: #c4c4c4 !important;
+}
+
+.adjust-controls {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-left: 3em;
+  padding-right: 3em;
+  border-right: 2.5px solid #e2e2e2;
+  border-left: 2.5px solid #e2e2e2;
+  padding-top: 3em;
+  padding-bottom: 1.5em;
+  font-weight: bold;
+  color: #333;
+}
+
+.adjust-controls #resize-factor,
+.adjust-controls #image-quality {
+  margin-bottom: 0.8em;
+  border: 1px solid #eee;
+}
+
+input[type="range"] {
+  border: 2px solid #e2e2e2 !important;
+  color:rgb(143, 27, 189);
+}
+
+#compress-btn {
+  width: 50%;
+  background: dodgerblue;
+  float: left;
+  border-radius: 0 !important;
+  border: none !important;
+  color: #fff !important;
+}
+
+#compress-btn:hover {
+  cursor: pointer;
+}
+
+#reset-btn {
+  float: left;
+  width: 50%;
+  border-radius: 0 !important;
+  border: none !important;
+}
+
+#reset-btn:hover {
+  cursor: pointer;
+}
+
+#download-link {
+  padding: 1em 2em;
+  background: rgb(143, 27, 189);
+  color: #fff;
+  text-decoration: none;
+  margin-bottom: 4em;
+}
+
+
+#compression-progress {
+  display: none;
+  width: 275px;
+}
+
+@media only screen and (max-width: 1152px) {
+
+  #app-injection {
+    margin: 0 !important;
+    overflow: visible;
+    z-index: 1;
+  }
+
+  #app {
+    width: 88%;
+    margin-top: -3em !important;
+  }
+
+  .adjust-controls {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4em 0 3em 0;
+  }
+
+  .adjust-controls #resize-factor,
+  .adjust-controls #image-quality {
+    margin-top: 0.5em;
+    width: 12.5em;
+  }
+}
