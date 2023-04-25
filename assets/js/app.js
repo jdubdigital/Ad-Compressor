@@ -1,1 +1,218 @@
-const inputFile = document.getElementById("input-file"), compressBtn = document.getElementById("compress-btn"), downloadLink = document.getElementById("download-link"), compressionProgress = document.getElementById("compression-progress"), resizeFactorInput = document.getElementById("resize-factor"), imageQualityInput = document.getElementById("image-quality"), compressedSizeElement = document.getElementById("compressed-size"), imagePreviewsContainer = document.getElementById("image-previews"), imageFileExtensions = ["jpg", "jpeg", "png", "gif"]; async function compressImage(e, t, i, a) { let s = URL.createObjectURL(new Blob([e])), n = new Image; n.src = s, await new Promise(e => n.onload = e); let l = document.createElement("canvas"), r = l.getContext("2d"); return l.width = n.width * i, l.height = n.height * i, r.drawImage(n, 0, 0, l.width, l.height), new Promise(e => { l.toBlob(e, "image/jpeg", a) }) } function formatBytes(e, t = 2) { if (0 === e) return "0 Bytes"; let i = Math.floor(Math.log(e) / Math.log(1024)); return parseFloat((e / Math.pow(1024, i)).toFixed(t < 0 ? 0 : t)) + " " + ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"][i] } async function displayImagePreviews(e, t, i, a) { let s = await compressImage(e, t, i, a), n = URL.createObjectURL(s), l = new Image; l.src = n, l.title = t, l.style.maxWidth = "300px", l.style.maxHeight = "300px", imagePreviewsContainer.appendChild(l) } function clearImagePreviews() { for (; imagePreviewsContainer.firstChild;)imagePreviewsContainer.removeChild(imagePreviewsContainer.firstChild); imagePreviewsContainer.style.display = "none" } async function initializeImagePreviews() { if (clearImagePreviews(), 0 === inputFile.files.length) return; let e = inputFile.files[0], t = new JSZip, i = await e.arrayBuffer(); await t.loadAsync(i); let a = parseFloat(resizeFactorInput.value), s = parseFloat(imageQualityInput.value); for (let n in t.files) { let l = n.split(".").pop().toLowerCase(); if (imageFileExtensions.includes(l)) { let r = await t.file(n).async("uint8array"); await displayImagePreviews(r, n, a, s) } } imagePreviewsContainer.style.display = "block" } async function updateImagePreviewsWithAdjustments() { if (0 === inputFile.files.length) return; let e = inputFile.files[0], t = new JSZip, i = await e.arrayBuffer(); await t.loadAsync(i); let a = parseFloat(resizeFactorInput.value), s = parseFloat(imageQualityInput.value), n = []; for (let l in t.files) { let r = l.split(".").pop().toLowerCase(); if (imageFileExtensions.includes(r)) { let o = await t.file(l).async("uint8array"), p = await compressImage(o, l, a, s), u = URL.createObjectURL(p); n.push({ blobUrl: u, fileName: l }) } } for (let { blobUrl: d, fileName: m } of (clearImagePreviews(), n)) { let c = new Image; c.src = d, c.title = m, c.style.maxWidth = "300px", c.style.maxHeight = "300px", imagePreviewsContainer.appendChild(c) } imagePreviewsContainer.style.display = "block" } inputFile.addEventListener("change", async () => { compressBtn.disabled = 0 === inputFile.files.length, await initializeImagePreviews() }), inputFile.addEventListener("change", updateImagePreviewsWithAdjustments), resizeFactorInput.addEventListener("input", updateImagePreviewsWithAdjustments), imageQualityInput.addEventListener("input", updateImagePreviewsWithAdjustments), compressBtn.addEventListener("click", async () => { let e = inputFile.files[0]; if (!e) return; compressBtn.disabled = !0, compressionProgress.style.display = "block", compressionProgress.value = 0; let t = new JSZip, i = new JSZip, a = await e.arrayBuffer(), s = parseFloat(resizeFactorInput.value), n = parseFloat(imageQualityInput.value); try { await i.loadAsync(a); let l = Object.keys(i.files).length, r = 0; for (let o in i.files) { let p = await i.file(o).async("uint8array"), u = o.split(".").pop().toLowerCase(); if (imageFileExtensions.includes(u)) { let d = await compressImage(p, o, s, n); t.file(o, d, { compression: "DEFLATE" }) } else t.file(o, p, { compression: "DEFLATE" }); r += 1, compressionProgress.value = r / l * 100 } let m = await t.generateAsync({ type: "blob" }), c = URL.createObjectURL(m); compressedSizeElement.textContent = `Compressed file size: ${formatBytes(m.size)}`, compressedSizeElement.style.display = "block", downloadLink.href = c, downloadLink.download = "compressed.zip", downloadLink.style.display = "block" } catch (g) { console.error("Error compressing ZIP file:", g) } finally { compressBtn.disabled = !1 } }); const resizeFactorOutput = document.getElementById("resize-factor-output"), imageQualityOutput = document.getElementById("image-quality-output"); function updateResizeFactorOutput() { resizeFactorOutput.value = resizeFactorInput.value } function updateImageQualityOutput() { imageQualityOutput.value = imageQualityInput.value } resizeFactorInput.addEventListener("input", updateResizeFactorOutput), imageQualityInput.addEventListener("input", updateImageQualityOutput); const resetBtn = document.getElementById("reset-btn"); function reset() { inputFile.value = "", compressBtn.disabled = !0, downloadLink.style.display = "none", compressedSizeElement.style.display = "none", compressionProgress.style.display = "none", clearImagePreviews() } resetBtn.addEventListener("click", reset);
+const inputFile = document.getElementById("input-file");
+const compressBtn = document.getElementById("compress-btn");
+const downloadLink = document.getElementById("download-link");
+const compressionProgress = document.getElementById("compression-progress");
+const resizeFactorInput = document.getElementById("resize-factor");
+const imageQualityInput = document.getElementById("image-quality");
+const compressedSizeElement = document.getElementById("compressed-size");
+const imagePreviewsContainer = document.getElementById("image-previews");
+
+const imageFileExtensions = ["jpg", "jpeg", "png", "gif"];
+
+async function compressImage(fileContent, fileName, resizeFactor, imageQuality) {
+  const blobUrl = URL.createObjectURL(new Blob([fileContent]));
+  const img = new Image();
+  img.src = blobUrl;
+  await new Promise((resolve) => (img.onload = resolve));
+
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
+  canvas.width = img.width * resizeFactor;
+  canvas.height = img.height * resizeFactor;
+  ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+  return new Promise((resolve) => {
+    canvas.toBlob(resolve, "image/jpeg", imageQuality);
+  });
+}
+
+function formatBytes(bytes, decimals = 2) {
+  if (bytes === 0) return "0 Bytes";
+  const k = 1024;
+  const dm = decimals < 0 ? 0 : decimals;
+  const sizes = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
+}
+
+async function displayImagePreviews(fileContent, fileName, resizeFactor, imageQuality) {
+  const compressedImageBlob = await compressImage(fileContent, fileName, resizeFactor, imageQuality);
+  const blobUrl = URL.createObjectURL(compressedImageBlob);
+  const img = new Image();
+  img.src = blobUrl;
+  img.title = fileName;
+  img.style.maxWidth = "300px";
+  img.style.maxHeight = "300px";
+
+  imagePreviewsContainer.appendChild(img);
+}
+
+function clearImagePreviews() {
+  while (imagePreviewsContainer.firstChild) {
+    imagePreviewsContainer.removeChild(imagePreviewsContainer.firstChild);
+  }
+  imagePreviewsContainer.style.display = "none";
+}
+
+async function initializeImagePreviews() {
+  clearImagePreviews();
+
+  if (inputFile.files.length === 0) {
+    return;
+  }
+
+  const file = inputFile.files[0];
+  const originalZip = new JSZip();
+  const fileData = await file.arrayBuffer();
+  await originalZip.loadAsync(fileData);
+
+  const resizeFactor = parseFloat(resizeFactorInput.value);
+  const imageQuality = parseFloat(imageQualityInput.value);
+
+  for (const fileName in originalZip.files) {
+    const fileExtension = fileName.split(".").pop().toLowerCase();
+
+    if (imageFileExtensions.includes(fileExtension)) {
+      const fileContent = await originalZip.file(fileName).async("uint8array");
+      await displayImagePreviews(fileContent, fileName, resizeFactor, imageQuality);
+    }
+  }
+
+  imagePreviewsContainer.style.display = "block";
+}
+
+async function updateImagePreviewsWithAdjustments() {
+  if (inputFile.files.length === 0) {
+    return;
+  }
+
+  const file = inputFile.files[0];
+  const originalZip = new JSZip();
+  const fileData = await file.arrayBuffer();
+  await originalZip.loadAsync(fileData);
+
+  const resizeFactor = parseFloat(resizeFactorInput.value);
+  const imageQuality = parseFloat(imageQualityInput.value);
+
+  const imagesToDisplay = [];
+
+  for (const fileName in originalZip.files) {
+    const fileExtension = fileName.split(".").pop().toLowerCase();
+
+    if (imageFileExtensions.includes(fileExtension)) {
+      const fileContent = await originalZip.file(fileName).async("uint8array");
+      const compressedImageBlob = await compressImage(fileContent, fileName, resizeFactor, imageQuality);
+      const blobUrl = URL.createObjectURL(compressedImageBlob);
+      imagesToDisplay.push({ blobUrl, fileName });
+    }
+  }
+
+
+  clearImagePreviews();
+
+  for (const { blobUrl, fileName } of imagesToDisplay) {
+    const img = new Image();
+    img.src = blobUrl;
+    img.title = fileName;
+    img.style.maxWidth = "300px";
+    img.style.maxHeight = "300px";
+    imagePreviewsContainer.appendChild(img);
+  }
+
+  imagePreviewsContainer.style.display = "block";
+}
+
+inputFile.addEventListener("change", async () => {
+  compressBtn.disabled = inputFile.files.length === 0;
+  await initializeImagePreviews();
+});
+
+inputFile.addEventListener("change", updateImagePreviewsWithAdjustments);
+
+resizeFactorInput.addEventListener("input", updateImagePreviewsWithAdjustments);
+imageQualityInput.addEventListener("input", updateImagePreviewsWithAdjustments);
+
+compressBtn.addEventListener("click", async () => {
+  const file = inputFile.files[0];
+  if
+    (!file) {
+    return;
+  }
+
+  compressBtn.disabled = true;
+  compressionProgress.style.display = "block";
+  compressionProgress.value = 0;
+
+  const compressedZip = new JSZip();
+  const originalZip = new JSZip();
+  const fileData = await file.arrayBuffer();
+  const resizeFactor = parseFloat(resizeFactorInput.value);
+  const imageQuality = parseFloat(imageQualityInput.value);
+
+  try {
+    await originalZip.loadAsync(fileData);
+    const totalFiles = Object.keys(originalZip.files).length;
+    let processedFiles = 0; for (const fileName in originalZip.files) {
+      const fileContent = await originalZip.file(fileName).async("uint8array");
+      const fileExtension = fileName.split(".").pop().toLowerCase();
+
+      if (imageFileExtensions.includes(fileExtension)) {
+        const compressedImageBlob = await compressImage(fileContent, fileName, resizeFactor, imageQuality);
+        compressedZip.file(fileName, compressedImageBlob, { compression: "DEFLATE" });
+      } else {
+        compressedZip.file(fileName, fileContent, { compression: "DEFLATE" });
+      }
+
+      processedFiles += 1;
+      compressionProgress.value = (processedFiles / totalFiles) * 100;
+    }
+
+
+    const compressedBlob = await compressedZip.generateAsync({ type: "blob" });
+    const downloadUrl = URL.createObjectURL(compressedBlob);
+
+    // Display the compressed file size
+    compressedSizeElement.textContent = `Compressed file size: ${formatBytes(compressedBlob.size)}`;
+    compressedSizeElement.style.display = "block";
+
+    downloadLink.href = downloadUrl;
+    downloadLink.download = "compressed.zip";
+    downloadLink.style.display = "block";
+  } catch (error) {
+    console.error("Error compressing ZIP file:", error);
+  } finally {
+    compressBtn.disabled = false;
+  }
+});
+
+
+// ... Rest of the JavaScript code
+
+const resizeFactorOutput = document.getElementById("resize-factor-output");
+const imageQualityOutput = document.getElementById("image-quality-output");
+
+function updateResizeFactorOutput() {
+  resizeFactorOutput.value = resizeFactorInput.value;
+}
+
+function updateImageQualityOutput() {
+  imageQualityOutput.value = imageQualityInput.value;
+}
+
+resizeFactorInput.addEventListener("input", updateResizeFactorOutput);
+imageQualityInput.addEventListener("input", updateImageQualityOutput);
+
+
+
+const resetBtn = document.getElementById("reset-btn");
+
+function reset() {
+  inputFile.value = "";
+  compressBtn.disabled = true;
+  downloadLink.style.display = "none";
+  compressedSizeElement.style.display = "none";
+  compressionProgress.style.display = "none";
+  clearImagePreviews();
+}
+
+resetBtn.addEventListener("click", reset);
