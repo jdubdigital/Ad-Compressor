@@ -178,38 +178,7 @@
 							<button id="my-form-button" class="button primary">Submit</button>
 							<p id="my-form-status"></p>
 						</form>
-						<!-- Place this script at the end of the body tag -->
-						<script>
-							var form = document.getElementById("my-form");
-							async function handleSubmit(event) {
-								event.preventDefault();
-								var status = document.getElementById("my-form-status");
-								var data = new FormData(event.target);
-								fetch(event.target.action, {
-									method: form.method,
-									body: data,
-									headers: {
-										'Accept': 'application/json'
-									}
-								}).then(response => {
-									if (response.ok) {
-										status.innerHTML = "Thanks for your submission!";
-										form.reset()
-									} else {
-										response.json().then(data => {
-											if (Object.hasOwn(data, 'errors')) {
-												status.innerHTML = data["errors"].map(error => error["message"]).join(", ")
-											} else {
-												status.innerHTML = "Oops! There was a problem submitting your form"
-											}
-										})
-									}
-								}).catch(error => {
-									status.innerHTML = "Oops! There was a problem submitting your form"
-								});
-							}
-							form.addEventListener("submit", handleSubmit)
-						</script>
+
 					</div>
 					<footer>
 						<ul class="items">
@@ -237,46 +206,43 @@
 							</ul>
 							</li>
 						</ul>
+						<div>2023 &copy; AdCompress.com</div>
 					</footer>
 				</section>
-
-				<div class="copyright">2023 &copy; Ad Compress. All rights reserved.</div>
 
 			</div>
 
 			<script>
-				document.getElementById("contact-form").addEventListener("submit", function (event) {
+				var form = document.getElementById("my-form");
+				async function handleSubmit(event) {
 					event.preventDefault();
-
-					// Get form data
-					const formData = new FormData(event.target);
-
-					// Send form data using AJAX
-					const xhr = new XMLHttpRequest();
-					xhr.open("POST", "contact.php", true);
-					xhr.onload = function () {
-						if (xhr.status === 200) {
-							// Show the success message
-							const successMessage = document.getElementById("success-message");
-							successMessage.innerHTML = `
-												<div style="background-color: #d4edda; border-color: #c3e6cb; padding: 15px; margin-bottom: 20px; border: 1px solid transparent; border-radius: 4px;">
-														<strong>Success!</strong> Your message has been sent.
-												</div>
-										`;
-							successMessage.style.display = "block";
-
-							// Clear the form
-							document.getElementById("contact-form").reset();
-						} else {
-							console.error("Error response:", xhr.responseText);
-							alert("An error occurred. Please try again.");
+					var status = document.getElementById("my-form-status");
+					var data = new FormData(event.target);
+					fetch(event.target.action, {
+						method: form.method,
+						body: data,
+						headers: {
+							'Accept': 'application/json'
 						}
-
-					};
-					xhr.send(formData);
-				});
+					}).then(response => {
+						if (response.ok) {
+							status.innerHTML = "Thanks for your submission!";
+							form.reset()
+						} else {
+							response.json().then(data => {
+								if (Object.hasOwn(data, 'errors')) {
+									status.innerHTML = data["errors"].map(error => error["message"]).join(", ")
+								} else {
+									status.innerHTML = "Oops! There was a problem submitting your form"
+								}
+							})
+						}
+					}).catch(error => {
+						status.innerHTML = "Oops! There was a problem submitting your form"
+					});
+				}
+				form.addEventListener("submit", handleSubmit)
 			</script>
-
 
 			<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
