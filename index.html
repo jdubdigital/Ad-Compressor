@@ -24,6 +24,16 @@
 		gtag('config', 'G-PL3XTPT2ZQ');
 	</script>
 
+	<script src="https://www.google.com/recaptcha/api.js?render={your-site-key}"></script>
+	<script>
+		grecaptcha.ready(function () {
+			grecaptcha.execute('{your-site-key}', { action: 'submit' }).then(function (token) {
+				console.info("got token: " + token);
+				document.getElementById('g-recaptcha-response').value = token;
+			});
+		});
+	</script>
+
 	<title>Ad Compress</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -122,8 +132,7 @@
 									<textarea name="message" id="message" placeholder="Message" rows="7"></textarea>
 								</div>
 							</div>
-							<div class="g-recaptcha" data-sitekey="6LfJb78lAAAAAG7Bu-xAUG-UbZOOQWlCnGEairHj"></div>
-							<br />
+							<input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
 							<button id="my-form-button" class="button primary">Submit</button>
 							<p id="my-form-status"></p>
 						</form>
