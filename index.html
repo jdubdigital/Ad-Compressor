@@ -27,7 +27,7 @@
 	<script src="https://www.google.com/recaptcha/api.js?render={6Lfldb8lAAAAAGDiRMQP6XxKgEY20twpRnot11fV}"></script>
 	<script>
 		grecaptcha.ready(function () {
-			grecaptcha.execute('{your-site-key}', { action: 'submit' }).then(function (token) {
+			grecaptcha.execute('{6Lfldb8lAAAAAGDiRMQP6XxKgEY20twpRnot11fV}', { action: 'submit' }).then(function (token) {
 				console.info("got token: " + token);
 				document.getElementById('g-recaptcha-response').value = token;
 			});
