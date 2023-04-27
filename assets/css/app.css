@@ -49,6 +49,12 @@
   color: #c4c4c4 !important;
 }
 
+#image-previews {
+  border-right: 2.5px solid #e2e2e2;
+  border-left: 2.5px solid #e2e2e2;
+  
+}
+
 .adjust-controls {
   display: flex;
   flex-direction: column;
