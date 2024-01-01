@@ -47,6 +47,7 @@
   font-family: monospace !important;
   z-index: 1;
   color: #c4c4c4 !important;
+  text-align: center;
 }
 
 #image-previews {
