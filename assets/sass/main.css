@@ -1,6 +1,6 @@
 @import 'fontawesome-all.min.css';
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,600,700,300i,600i,700i|Raleway:600,800");
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;700;800&display=swap');
+
 /*
 	Paradigm Shift by Pixelarity
 	pixelarity.com | hello@pixelarity.com
@@ -167,8 +167,7 @@ p {
 
 h1, h2, h3, h4, h5, h6 {
   color: #000000;
-  font-family: 'Outfit', sans-serif !important;
-
+  font-family: "Raleway", Helvetica, sans-serif;
   font-weight: 600;
   letter-spacing: 0.175em;
   line-height: 1.75;
