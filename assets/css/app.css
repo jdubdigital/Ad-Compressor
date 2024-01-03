@@ -79,7 +79,7 @@
 .adjust-controls #image-quality {
   margin-bottom: 0.8em;
   border: 1px solid #eee;
-  background-color: #0075FF;
+  background-color: #8CBAE8;
   height: 5px;
   cursor: pointer;
 }
@@ -89,6 +89,7 @@
   font-family: monospace;
   font-weight: 400;
   letter-spacing: normal;
+  font-size: 14px;
 }
 
 input[type="range"] {
@@ -176,4 +177,6 @@ button,
     margin-top: 0.5em;
     width: 12.5em;
   }
+
+  
 }
