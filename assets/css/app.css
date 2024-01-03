@@ -10,6 +10,7 @@
 
 #app {
   border-radius: none;
+  width: 60%;
 }
 
 .custom-file-input {
