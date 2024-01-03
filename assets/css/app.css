@@ -4,7 +4,6 @@
   align-items: center;
   justify-content: center;
   background: #fdfdfd;
-  font-family: monospace !important;
   margin: 19% 20% 0 0;
 }
 
@@ -45,7 +44,6 @@
 }
 
 .custom-file-input-text {
-  font-family: monospace !important;
   z-index: 1;
   color: #c4c4c4 !important;
   text-align: center;
@@ -77,11 +75,26 @@
 .adjust-controls #image-quality {
   margin-bottom: 0.8em;
   border: 1px solid #eee;
+  background-color: #0075FF;
+  height: 6px;
+  cursor: pointer;
+}
+
+.adjust-controls label {
+  text-transform: none;
+  font-family:monospace;
+  font-weight: 400;
+  letter-spacing: normal;
 }
 
 input[type="range"] {
-  border: 2px solid #e2e2e2 !important;
   color: rgb(143, 27, 189);
+}
+
+#image-quality-output, #resize-factor-output {
+  font-weight: 100 !important;
+  font-size: 20px;
+  font-family: monospace;
 }
 
 #compress-btn {
