@@ -181,7 +181,7 @@ input[type="number"].always-show-arrows::-webkit-outer-spin-button {
 }
 
 .input-with-suffix .suffix {
-  margin-top: 8px;
+  margin-top: 10px;
   margin-left: -23px;
   /* Adjust as needed to position the '%' correctly */
   color: #555;
