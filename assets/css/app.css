@@ -87,9 +87,10 @@
 .adjust-controls label {
   text-transform: none;
   font-family: monospace;
-  font-weight: 400;
+  font-weight: 600;
   letter-spacing: normal;
   font-size: 14px;
+  color:#3f3f3f;
 }
 
 input[type="range"] {
@@ -269,7 +270,7 @@ button,
   }
 
   .input-with-suffix .suffix {
-    margin-left: -27px;
+    margin-left: -29px;
   }
 
 }
