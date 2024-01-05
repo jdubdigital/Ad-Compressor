@@ -154,7 +154,7 @@ input[type="number"].always-show-arrows {
   border: 2px solid #EEEEEE;
   border-radius: 5px;
   height: 33px;
-  margin-top: 8px;
+  margin-top: 10px;
 }
 
 input[type="number"].always-show-arrows:focus {
