@@ -225,10 +225,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Reset range and number inputs to their default values
     resizeFactorInput.value = 100; // Default value for resize factor
-    imageQualityInput.value = 75; // Default value for image quality
+    imageQualityInput.value = 100; // Default value for image quality
 
     resizeFactorOutput.value = 100; // Synchronize with the range input
-    imageQualityOutput.value = 75; // Synchronize with the range input
+    imageQualityOutput.value = 100; // Synchronize with the range input
 
     // Optionally, update image previews after resetting (if required)
     // updateImagePreviewsWithAdjustments();
