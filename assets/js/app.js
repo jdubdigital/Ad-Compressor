@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const imageFileExtensions = ["jpg", "jpeg", "png", "gif", "webp", "svg", "bmp", "tiff", "avif"];
 
+
   function syncValues(sliderId, numberInputId) {
     var slider = document.getElementById(sliderId);
     var numberInput = document.getElementById(numberInputId);
@@ -62,23 +63,23 @@ document.addEventListener('DOMContentLoaded', function () {
     let img = document.getElementById(imgId);
 
     if (!img) {
-        img = new Image();
-        img.id = imgId;
-        img.style.maxWidth = "300px";
-        img.style.maxHeight = "300px";
-        imagePreviewsContainer.appendChild(img);
+      img = new Image();
+      img.id = imgId;
+      img.style.maxWidth = "300px";
+      img.style.maxHeight = "300px";
+      imagePreviewsContainer.appendChild(img);
     }
 
     const compressedImageBlob = await compressImage(fileContent, fileName, resizeFactor, imageQuality);
     img.src = URL.createObjectURL(compressedImageBlob);
-}
-
-
-function clearImagePreviews() {
-  while (imagePreviewsContainer.firstChild) {
-      imagePreviewsContainer.removeChild(imagePreviewsContainer.firstChild);
   }
-}
+
+
+  function clearImagePreviews() {
+    while (imagePreviewsContainer.firstChild) {
+      imagePreviewsContainer.removeChild(imagePreviewsContainer.firstChild);
+    }
+  }
 
 
   async function initializeImagePreviews() {
@@ -121,37 +122,27 @@ function clearImagePreviews() {
     const resizeFactor = parseFloat(resizeFactorInput.value);
     const imageQuality = parseFloat(imageQualityInput.value);
 
-    const imagesToDisplay = [];
-
     for (const fileName in originalZip.files) {
       const fileExtension = fileName.split(".").pop().toLowerCase();
-
       if (imageFileExtensions.includes(fileExtension)) {
         const fileContent = await originalZip.file(fileName).async("uint8array");
         const compressedImageBlob = await compressImage(fileContent, fileName, resizeFactor, imageQuality);
         const blobUrl = URL.createObjectURL(compressedImageBlob);
-        imagesToDisplay.push({
-          blobUrl,
-          fileName
-        });
+        const imgId = `preview-${fileName}`;
+        let img = document.getElementById(imgId);
+
+        if (img) {
+          img.src = blobUrl;
+        } else {
+          img = new Image();
+          img.id = imgId;
+          img.src = blobUrl;
+          img.style.maxWidth = "300px";
+          img.style.maxHeight = "300px";
+          imagePreviewsContainer.appendChild(img);
+        }
       }
     }
-
-    clearImagePreviews();
-
-    for (const {
-        blobUrl,
-        fileName
-      } of imagesToDisplay) {
-      const img = new Image();
-      img.src = blobUrl;
-      img.title = fileName;
-      img.style.maxWidth = "300px";
-      img.style.maxHeight = "300px";
-      imagePreviewsContainer.appendChild(img);
-    }
-
-    imagePreviewsContainer.style.display = "block";
   }
 
   inputFile.addEventListener("change", async () => {
