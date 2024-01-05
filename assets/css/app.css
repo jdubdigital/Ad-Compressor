@@ -78,7 +78,6 @@
 .adjust-controls #resize-factor,
 .adjust-controls #image-quality {
   margin-bottom: 0.8em;
-  border: 1px solid #eee;
   border-radius: 25px;
   background-color: #8CBAE8;
   height: 8px;
@@ -157,12 +156,13 @@ input[type="number"].always-show-arrows {
   margin-top: 10px;
 }
 
+
 input[type="number"].always-show-arrows:focus {
   outline: none;
   /* Removes the default focus outline */
   border: 2px solid blue;
   /* Blue border with 2px thickness */
-  box-shadow: 0 0 5px rgba(0, 0, 255, 0.5);
+
   /* Optional: Adds a glow effect */
   z-index: 1;
   background: transparent;
@@ -182,17 +182,18 @@ input[type="number"].always-show-arrows::-webkit-outer-spin-button {
 
 .input-with-suffix .suffix {
   margin-top: 10px;
-  margin-left: -23px;
+  margin-left: -31px;
   /* Adjust as needed to position the '%' correctly */
-  color: #555;
+  color: #555555;
   /* Color of the suffix text */
   background: #eeeeee;
-  border-radius: 0 4px 4px 0;
-  padding: 0 4px;
-  height: 29px;
+  border-radius: 3px ;
+  padding: 5px 6px;
+  font-weight: 600;
+  height: 25px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content:space-around;
   z-index: 0;
 }
 
