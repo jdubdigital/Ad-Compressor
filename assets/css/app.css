@@ -11,7 +11,6 @@
 
 #app {
   width: 50%;
-
   border-radius: 15px;
 }
 
@@ -58,6 +57,7 @@
   border-left: 2px solid #eee;
   margin: 0 auto;
   text-align: center;
+  height: auto;
 }
 
 .adjust-controls {
@@ -79,8 +79,9 @@
 .adjust-controls #image-quality {
   margin-bottom: 0.8em;
   border: 1px solid #eee;
+  border-radius: 25px;
   background-color: #8CBAE8;
-  height: 5px;
+  height: 8px;
   cursor: pointer;
 }
 
@@ -96,11 +97,103 @@ input[type="range"] {
   color: rgb(143, 27, 189);
 }
 
+/* For WebKit browsers */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  /* Width of the slider thumb */
+  height: 15px;
+  /* Height of the slider thumb */
+  background: dodgerblue;
+  /* Slider thumb color */
+  cursor: pointer;
+  /* Cursor on hover */
+  border-radius: 50%;
+  /* Make it circular */
+}
+
+/* For Mozilla browsers */
+input[type="range"]::-moz-range-thumb {
+  width: 15px;
+  /* Width of the slider thumb */
+  height: 15px;
+  /* Height of the slider thumb */
+  background: dodgerblue;
+  /* Slider thumb color */
+  cursor: pointer;
+  /* Cursor on hover */
+  border-radius: 50%;
+  /* Make it circular */
+}
+
+/* For Microsoft Edge */
+input[type="range"]::-ms-thumb {
+  width: 15px;
+  /* Width of the slider thumb */
+  height: 15px;
+  /* Height of the slider thumb */
+  background: dodgerblue;
+  /* Slider thumb color */
+  cursor: pointer;
+  /* Cursor on hover */
+  border-radius: 50%;
+  /* Make it circular */
+}
+
 #image-quality-output,
 #resize-factor-output {
   font-weight: 100 !important;
-  font-size: 20px;
+  font-size: 15px;
   font-family: monospace;
+  padding-left: 4px;
+  color: #2c2b30;
+}
+
+input[type="number"].always-show-arrows {
+  border: 2px solid #EEEEEE;
+  border-radius: 5px;
+  height: 33px;
+  margin-top: 8px;
+}
+
+input[type="number"].always-show-arrows:focus {
+  outline: none;
+  /* Removes the default focus outline */
+  border: 2px solid blue;
+  /* Blue border with 2px thickness */
+  box-shadow: 0 0 5px rgba(0, 0, 255, 0.5);
+  /* Optional: Adds a glow effect */
+  z-index: 1;
+  background: transparent;
+}
+
+/* Hide the spin buttons */
+input[type="number"].always-show-arrows::-webkit-inner-spin-button,
+input[type="number"].always-show-arrows::-webkit-outer-spin-button {
+  display: none;
+}
+
+/* Container for input with suffix */
+.input-with-suffix {
+  display: inline-flex;
+  align-items: center;
+}
+
+.input-with-suffix .suffix {
+  margin-top: 8px;
+  margin-left: -23px;
+  /* Adjust as needed to position the '%' correctly */
+  color: #555;
+  /* Color of the suffix text */
+  background: #eeeeee;
+  border-radius: 0 5px 5px 0;
+  padding: 0 4px;
+  height: 29px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 0;
 }
 
 #compress-btn {
@@ -180,5 +273,5 @@ button,
     width: 12.5em;
   }
 
-  
+
 }
