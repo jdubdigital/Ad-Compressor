@@ -28,7 +28,7 @@
 }
 
 .custom-file-input:hover {
-  border: 3px dashed #8f1bbd;
+  border: 2px dashed #5E55EC;
   cursor: pointer;
 }
 
@@ -219,6 +219,8 @@ input[type="number"].always-show-arrows::-webkit-outer-spin-button {
   border-top: 2px solid #eee;
   border-bottom: 2px solid #eee;
 }
+
+
 
 #reset-btn:hover {
   cursor: pointer;
