@@ -20,6 +20,10 @@
   filter: brightness(1.1);
 }
 
+img .demo {
+  width: 2em;
+}
+
 .custom-file-input {
   display: flex;
   justify-content: center;
